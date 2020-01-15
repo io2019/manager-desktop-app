@@ -28,6 +28,9 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     private APIController controller = new APIController();
+    private Parent root;
+    private FXMLLoader loader;
+    private Stage stage;
 
     @FXML
     private Button editFilmButton;
@@ -84,11 +87,17 @@ public class Controller implements Initializable {
     private Button logOkButton;
 
     @FXML
+    private Button roomRefreshButton;
+
+    @FXML
+    private Button showRefreshButton;
+
+    @FXML
     void refreshFilms() {
+        // todo "api call"
 //        Call<List<Film>> callSync = this.controller.api.getFilms();
 //        try {
-//            Response<List<Film>> response = callSync.execute();
-//            List<Film> films = response.body();
+//            List<Film> films = callSync.execute().body();
 //            this.filmsPane.setItems(null);
 //            this.filmsPane.setItems(FXCollections.observableList(films));
 //        } catch (IOException e) {
@@ -101,18 +110,51 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void addFilm(ActionEvent event) {
-        Parent root;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("addFilm.fxml"));
-            root = loader.load();
+    void refreshRooms() {
+        // todo "api call"
+//        Call<List<Showroom>> callSync = this.controller.api.getRooms();
+//        try {
+//            List<Showroom> rooms = callSync.execute().body();
+//            this.roomPane.setItems(null);
+//            this.roomPane.setItems(FXCollections.observableList(rooms));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-            AddFilm addfilm = loader.getController();
+        ObservableList<Showroom> tmp = this.roomPane.getItems();
+        this.roomPane.setItems(null);
+        this.roomPane.setItems(tmp);
+    }
+
+    @FXML
+    void refreshShows() {
+        // todo "api call"
+//        Call<List<Showtime>> callSync = this.controller.api.getShows();
+//        try {
+//            List<Showtime> shows = callSync.execute().body();
+//            this.showPane.setItems(null);
+//            this.showPane.setItems(FXCollections.observableList(shows));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        ObservableList<Showtime> tmp = this.showPane.getItems();
+        this.showPane.setItems(null);
+        this.showPane.setItems(tmp);
+    }
+
+    @FXML
+    void addFilm(ActionEvent event) {
+        try {
+            this.loader = new FXMLLoader();
+            this.loader.setLocation(getClass().getClassLoader().getResource("addFilm.fxml"));
+            this.root = this.loader.load();
+
+            AddFilm addfilm = this.loader.getController();
             addfilm.setList(this.filmsPane.getItems());
 
 
-            Stage stage = new Stage();
+            this.stage = new Stage();
             stage.setTitle("Dodaj nowy film");
             stage.setScene(new Scene(root));
             stage.show();
@@ -123,16 +165,15 @@ public class Controller implements Initializable {
 
     @FXML
     void editFilm(ActionEvent event) {
-        Parent root;
         try {
-            FXMLLoader loader = new FXMLLoader();
+            loader = new FXMLLoader();
             loader.setLocation(getClass().getClassLoader().getResource("editFilm.fxml"));
             root = loader.load();
 
             EditFilm editFilm = loader.getController();
             editFilm.set(this.filmsPane.getSelectionModel().getSelectedItem(), this.filmsPane.getItems());
-//            this.filmDetails.setFilm(new Film(0, "DUPSKO"));
-            Stage stage = new Stage();
+
+            stage = new Stage();
             stage.setTitle("Edytuj film");
             stage.setScene(new Scene(root));
             stage.show();
@@ -152,12 +193,40 @@ public class Controller implements Initializable {
 
     @FXML
     void addRoom(ActionEvent event) {
+        try {
+            loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("addRoom.fxml"));
+            root = loader.load();
 
+            AddRoom addRoom = loader.getController();
+            addRoom.set(this.roomPane.getItems());
+
+            stage = new Stage();
+            stage.setTitle("Dodaj salę");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void editRoom(ActionEvent event) {
+        try {
+            loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("editRoom.fxml"));
+            root = loader.load();
 
+            EditRoom editRoom = loader.getController();
+            editRoom.set(this.roomPane.getItems(), this.roomPane.getSelectionModel().getSelectedItem());
+
+            stage = new Stage();
+            stage.setTitle("Edytuj salę");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

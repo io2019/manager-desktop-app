@@ -47,6 +47,7 @@
                               <Button fx:id="addRoomButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="25.0" prefWidth="151.0" text="Dodaj salę" />
                               <Button fx:id="editRoomButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editRoom" prefHeight="25.0" prefWidth="151.0" text="Edytuj salę" />
                               <Button fx:id="deleteRoomButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="25.0" prefWidth="151.0" text="Usuń salę" />
+                              <Button fx:id="roomRefreshButton" layoutX="481.0" layoutY="380.0" mnemonicParsing="false" onAction="#refreshRooms" text="Refresh" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -67,6 +68,7 @@
                               <Button fx:id="addShowButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addShow" prefHeight="25.0" prefWidth="151.0" text="Dodaj seans" />
                               <Button fx:id="editShowButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editShow" prefHeight="25.0" prefWidth="151.0" text="Edytuj seans" />
                               <Button fx:id="deleteShowButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteShow" prefHeight="25.0" prefWidth="151.0" text="Usuń seans" />
+                              <Button fx:id="showRoomButton" layoutX="491.0" layoutY="390.0" mnemonicParsing="false" onAction="#refreshShows" text="Refresh" />
                            </children>
                         </AnchorPane>
                      </content>

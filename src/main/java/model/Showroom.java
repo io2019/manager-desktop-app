@@ -3,29 +3,29 @@ package model;
 import java.util.List;
 
 public class Showroom {
-    private long id;
-    private long seatsNumber;
+    private int id;
+    private int seatsNumber;
     private List<Seat> seats;
 
-    public Showroom(long id, long seatsNumber, List<Seat> seats) {
+    public Showroom(int id, int seatsNumber, List<Seat> seats) {
         this.id = id;
         this.seatsNumber = seatsNumber;
         this.seats = seats;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getSeatsNumber() {
+    public int getSeatsNumber() {
         return seatsNumber;
     }
 
-    public void setSeatsNumber(long seatsNumber) {
+    public void setSeatsNumber(int seatsNumber) {
         this.seatsNumber = seatsNumber;
     }
 
@@ -35,5 +35,10 @@ public class Showroom {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.id);
     }
 }
