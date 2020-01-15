@@ -8,12 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Film;
+import model.Log;
 import model.Showroom;
 import model.Showtime;
 import retrofit2.Call;
@@ -21,6 +19,9 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -62,7 +63,7 @@ public class Controller implements Initializable {
     private ListView<Film> filmsPane;
 
     @FXML
-    private ScrollPane logList;
+    private ListView<Log> logsList;
 
     @FXML
     private Button deleteFilmButton;
@@ -74,12 +75,20 @@ public class Controller implements Initializable {
     private Button filmRefreshButton;
 
     @FXML
+    private DatePicker startDate;
+
+    @FXML
+    private DatePicker endDate;
+
+    @FXML
+    private Button logOkButton;
+
+    @FXML
     void refreshFilms() {
 //        Call<List<Film>> callSync = this.controller.api.getFilms();
 //        try {
 //            Response<List<Film>> response = callSync.execute();
 //            List<Film> films = response.body();
-//            ObservableList<Film> tmp = this.filmsPane.getItems();
 //            this.filmsPane.setItems(null);
 //            this.filmsPane.setItems(FXCollections.observableList(films));
 //        } catch (IOException e) {
@@ -136,6 +145,8 @@ public class Controller implements Initializable {
 
     @FXML
     void deleteFilm(ActionEvent event) {
+        this.filmsPane.getItems().remove(this.filmsPane.getSelectionModel().getSelectedIndex());
+        // todo "delete on API"
 
     }
 
@@ -169,6 +180,23 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    void getLogs(ActionEvent event) {
+        Date start = Date.from(this.startDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date end = Date.from(this.endDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Call<List<Log>> callSync = this.controller.api.getLogs(start, end);
+        try {
+            Response<List<Log>> response = callSync.execute();
+            List<Log> logs = response.body();
+            this.logsList.setItems(null);
+            this.logsList.setItems(FXCollections.observableList(logs));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
+
+
 }

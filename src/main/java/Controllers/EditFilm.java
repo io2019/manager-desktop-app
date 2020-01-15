@@ -2,7 +2,6 @@ package Controllers;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -33,6 +32,7 @@ public class EditFilm implements Initializable {
         this.film.setTitle(this.titleTextBox.getText());
         obs.stream().filter(x -> x.getId() == this.film.getId()).findFirst()
                 .get().setTitle(this.titleTextBox.getText());
+        // todo "update on api"
         this.close();
     }
 

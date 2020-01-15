@@ -1,12 +1,10 @@
 package Controllers;
 
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Film;
@@ -31,6 +29,7 @@ public class AddFilm {
         if (!text.equals("")) {
             film = new Film(0, text);
             this.obs.add(film);
+            // todo "add on api"
             this.close();
 
         } else {
