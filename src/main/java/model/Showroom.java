@@ -2,12 +2,12 @@ package model;
 
 import java.util.List;
 
-public class Room {
+public class Showroom {
     private long id;
     private long seatsNumber;
     private List<Seat> seats;
 
-    public Room(long id, long seatsNumber, List<Seat> seats) {
+    public Showroom(long id, long seatsNumber, List<Seat> seats) {
         this.id = id;
         this.seatsNumber = seatsNumber;
         this.seats = seats;

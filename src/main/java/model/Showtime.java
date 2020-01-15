@@ -2,16 +2,16 @@ package model;
 
 import java.util.Date;
 
-public class Show {
+public class Showtime {
     private long id;
     private Film film;
-    private Room room;
+    private Showroom showroom;
     private Date date;
 
-    public Show(long id, Film film, Room room, Date date) {
+    public Showtime(long id, Film film, Showroom showroom, Date date) {
         this.id = id;
         this.film = film;
-        this.room = room;
+        this.showroom = showroom;
         this.date = date;
     }
 
@@ -31,12 +31,12 @@ public class Show {
         this.film = film;
     }
 
-    public Room getRoom() {
-        return room;
+    public Showroom getShowroom() {
+        return showroom;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setShowroom(Showroom showroom) {
+        this.showroom = showroom;
     }
 
     public Date getDate() {

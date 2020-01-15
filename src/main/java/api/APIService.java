@@ -15,37 +15,37 @@ public interface APIService {
     Call<List<Film>> getFilms();
 
     @GET("/showtimes")
-    Call<List<Show>> getShows();
+    Call<List<Showtime>> getShows();
 
     @GET("/showrooms")
-    Call<List<Room>> getRooms();
+    Call<List<Showroom>> getRooms();
 
     @POST("/movies")
     Call<Response> postFilm(@Body Film film);
 
     @POST("/showtimes")
-    Call<Response> postShow(@Body Show show);
+    Call<Response> postShow(@Body Showtime showtime);
 
     @POST("/showrooms")
-    Call<Response> postRoom(@Body Room room);
+    Call<Response> postRoom(@Body Showroom showroom);
 
     @GET("/movies/{id}")
     Call<Film> getFilm(@Path("id") long id);
 
     @GET("/showtimes/{id}")
-    Call<Show> getShow(@Path("id") long id);
+    Call<Showtime> getShow(@Path("id") long id);
 
     @GET("/showrooms/{id}")
-    Call<Room> getRoom(@Path("id") long id);
+    Call<Showroom> getRoom(@Path("id") long id);
 
     @PUT("/movies/{id}")
     Call<Response> putFilm(@Path("id") long id, @Body Film film);
 
     @PUT("/showrooms/{id}")
-    Call<Response> putRoom(@Path("id") long id, @Body Room room);
+    Call<Response> putRoom(@Path("id") long id, @Body Showroom showroom);
 
     @PUT("/showtimes/{id}")
-    Call<Response> putShow(@Path("id") long id, @Body Show show);
+    Call<Response> putShow(@Path("id") long id, @Body Showtime showtime);
 
     @GET("/logs?from={startDate}&to={endDate}")
     Call<List<Log>> getLogs(@Path("startDate") Date startDate, @Path("endDate") Date endDate);
