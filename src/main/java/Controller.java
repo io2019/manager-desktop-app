@@ -2,6 +2,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
+import model.Film;
+import model.Room;
+import model.Show;
 
 public class Controller {
 
@@ -9,15 +12,17 @@ public class Controller {
     private TabPane panes;
 
     @FXML
-    private ListView<?> moviesPane;
+    private ListView<Film> moviesPane;
 
     @FXML
     private Button addMovie;
 
     @FXML
-    private ListView<?> roomPane;
+    private ListView<Room> roomPane;
 
     @FXML
-    private ListView<?> showPane;
+    private ListView<Show> showPane;
+
+    public void addMovie() {}
 
 }
