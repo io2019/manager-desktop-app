@@ -18,14 +18,15 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="442.0" prefWidth="379.0">
                                        <children>
-                                          <ListView fx:id="moviesPane" prefHeight="444.0" prefWidth="382.0" />
+                                          <ListView fx:id="filmsPane" prefHeight="444.0" prefWidth="382.0" />
                                        </children>
                                     </AnchorPane>
                                 </content>
                               </ScrollPane>
-                              <Button fx:id="addMovie" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="151.0" text="Dodaj film" />
-                              <Button layoutX="426.0" layoutY="84.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Edytuj film" />
-                              <Button layoutX="426.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Usuń film" />
+                              <Button fx:id="addFilmButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addFilm" prefHeight="25.0" prefWidth="151.0" text="Dodaj film" />
+                              <Button fx:id="editFilmButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editFilm" prefHeight="25.0" prefWidth="151.0" text="Edytuj film" />
+                              <Button fx:id="deleteFilmButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteFilm" prefHeight="25.0" prefWidth="151.0" text="Usuń film" />
+                              <Button fx:id="filmRefreshButton" layoutX="471.0" layoutY="370.0" mnemonicParsing="false" onAction="#refreshFilms" text="Refresh" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -42,9 +43,9 @@
                                     </AnchorPane>
                                  </content>
                               </ScrollPane>
-                              <Button layoutX="426.0" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Dodaj salę" />
-                              <Button layoutX="426.0" layoutY="84.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Edytuj salę" />
-                              <Button layoutX="426.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Usuń salę" />
+                              <Button fx:id="addRoomButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="25.0" prefWidth="151.0" text="Dodaj salę" />
+                              <Button fx:id="editRoomButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editRoom" prefHeight="25.0" prefWidth="151.0" text="Edytuj salę" />
+                              <Button fx:id="deleteRoomButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="25.0" prefWidth="151.0" text="Usuń salę" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -62,16 +63,27 @@
                                     </AnchorPane>
                                  </content>
                               </ScrollPane>
-                              <Button layoutX="426.0" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Dodaj seans" />
-                              <Button layoutX="426.0" layoutY="84.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Edytuj seans" />
-                              <Button layoutX="426.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Usuń seans" />
+                              <Button fx:id="addShowButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addShow" prefHeight="25.0" prefWidth="151.0" text="Dodaj seans" />
+                              <Button fx:id="editShowButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editShow" prefHeight="25.0" prefWidth="151.0" text="Edytuj seans" />
+                              <Button fx:id="deleteShowButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteShow" prefHeight="25.0" prefWidth="151.0" text="Usuń seans" />
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
                   <Tab text="Logi">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane fx:id="logList" prefHeight="446.0" prefWidth="640.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="634.0">
+                                       <children>
+                                          <ListView fx:id="logList" prefHeight="439.0" prefWidth="630.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
               </tabs>
