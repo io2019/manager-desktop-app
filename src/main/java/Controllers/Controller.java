@@ -95,52 +95,40 @@ public class Controller implements Initializable {
     @FXML
     void refreshFilms() {
         // todo "api call"
-//        Call<List<Film>> callSync = this.controller.api.getFilms();
-//        try {
-//            List<Film> films = callSync.execute().body();
-//            this.filmsPane.setItems(null);
-//            this.filmsPane.setItems(FXCollections.observableList(films));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-        ObservableList<Film> tmp = this.filmsPane.getItems();
-        this.filmsPane.setItems(null);
-        this.filmsPane.setItems(tmp);
+        Call<List<Film>> callSync = this.controller.api.getFilms();
+        try {
+            List<Film> films = callSync.execute().body();
+            this.filmsPane.setItems(null);
+            this.filmsPane.setItems(FXCollections.observableList(films));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void refreshRooms() {
         // todo "api call"
-//        Call<List<Showroom>> callSync = this.controller.api.getRooms();
-//        try {
-//            List<Showroom> rooms = callSync.execute().body();
-//            this.roomPane.setItems(null);
-//            this.roomPane.setItems(FXCollections.observableList(rooms));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-        ObservableList<Showroom> tmp = this.roomPane.getItems();
-        this.roomPane.setItems(null);
-        this.roomPane.setItems(tmp);
+        Call<List<Showroom>> callSync = this.controller.api.getRooms();
+        try {
+            List<Showroom> rooms = callSync.execute().body();
+            this.roomPane.setItems(null);
+            this.roomPane.setItems(FXCollections.observableList(rooms));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void refreshShows() {
         // todo "api call"
-//        Call<List<Showtime>> callSync = this.controller.api.getShows();
-//        try {
-//            List<Showtime> shows = callSync.execute().body();
-//            this.showPane.setItems(null);
-//            this.showPane.setItems(FXCollections.observableList(shows));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-        ObservableList<Showtime> tmp = this.showPane.getItems();
-        this.showPane.setItems(null);
-        this.showPane.setItems(tmp);
+        Call<List<Showtime>> callSync = this.controller.api.getShows();
+        try {
+            List<Showtime> shows = callSync.execute().body();
+            this.showPane.setItems(null);
+            this.showPane.setItems(FXCollections.observableList(shows));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
