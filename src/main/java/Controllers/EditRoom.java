@@ -26,14 +26,12 @@ public class EditRoom {
 
     @FXML
     void confirm(ActionEvent event) {
-        boolean tmp1 = this.numberOfSeatsText.getText().isEmpty();
-        boolean tmp2 = this.roomNo.getText().isEmpty();
         if (!this.numberOfSeatsText.getText().isEmpty() && !this.roomNo.getText().isEmpty()) {
             int seats, no;
             try {
                 seats = Integer.parseUnsignedInt(this.numberOfSeatsText.getText());
                 no = Integer.parseUnsignedInt(this.roomNo.getText());
-                
+
 
                 this.obs.stream().filter(r -> r.getId() == no).findFirst().ifPresent( r -> {
                     r.setSeatsNumber(seats);

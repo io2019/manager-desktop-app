@@ -7,11 +7,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddFilm">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddShow">
    <children>
       <Button fx:id="okButton" layoutX="507.0" layoutY="350.0" mnemonicParsing="false" onAction="#confirm" text="OK" />
-      <TextField fx:id="titleTextBox" layoutX="29.0" layoutY="52.0" prefHeight="25.0" prefWidth="353.0" />
-      <Text layoutX="29.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tytuł" />
-      <Text fx:id="errorText" layoutX="29.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tytuł nie może być pusty" visible="false" wrappingWidth="208.7294921875" />
+      <TextField fx:id="idTextBox" layoutX="29.0" layoutY="52.0" prefHeight="25.0" prefWidth="353.0" />
+      <Text layoutX="29.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+      <ComboBox fx:id="filmComboBox" layoutX="29.0" layoutY="119.0" prefHeight="25.0" prefWidth="353.0" />
+      <ComboBox fx:id="roomComboBox" layoutX="29.0" layoutY="188.0" prefHeight="25.0" prefWidth="353.0" />
+      <DatePicker fx:id="datePicker" layoutX="29.0" layoutY="267.0" prefHeight="25.0" prefWidth="353.0" />
+      <Text layoutX="28.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Film" />
+      <Text layoutX="29.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sala" />
+      <Text layoutX="29.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" />
    </children>
 </AnchorPane>

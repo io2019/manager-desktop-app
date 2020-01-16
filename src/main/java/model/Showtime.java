@@ -46,4 +46,9 @@ public class Showtime {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return this.film.toString() + ";" + this.showroom.getId() + ";" + this.date.toString();
+    }
 }

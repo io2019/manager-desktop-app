@@ -231,22 +231,52 @@ public class Controller implements Initializable {
 
     @FXML
     void deleteRoom(ActionEvent event) {
-
+        this.roomPane.getItems().remove(this.roomPane.getSelectionModel().getSelectedIndex());
+        // todo "api call"
     }
 
     @FXML
     void addShow(ActionEvent event) {
+        try {
+            loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("addShow.fxml"));
+            root = loader.load();
 
+            AddShow addShow = loader.getController();
+            addShow.set(this.showPane.getItems(), this.filmsPane.getItems(), this.roomPane.getItems());
+
+            stage = new Stage();
+            stage.setTitle("Dodaj seans");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void editShow(ActionEvent event) {
+        try {
+            loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("editShow.fxml"));
+            root = loader.load();
 
+            EditShow editShow = loader.getController();
+            editShow.set(this.showPane.getSelectionModel().getSelectedItem(), this.showPane.getItems(),
+                    this.filmsPane.getItems(), this.roomPane.getItems());
+
+            stage = new Stage();
+            stage.setTitle("Edytuj seans");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void deleteShow(ActionEvent event) {
-
+        this.showPane.getItems().remove(this.showPane.getSelectionModel().getSelectedIndex());
     }
 
     @FXML
