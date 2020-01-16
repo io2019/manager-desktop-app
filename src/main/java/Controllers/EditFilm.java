@@ -11,6 +11,7 @@ import model.Film;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.IntStream;
 
 public class EditFilm implements Initializable {
 
@@ -30,8 +31,11 @@ public class EditFilm implements Initializable {
     @FXML
     void confirm() {
         this.film.setTitle(this.titleTextBox.getText());
-        obs.stream().filter(x -> x.getId() == this.film.getId()).findFirst()
-                .get().setTitle(this.titleTextBox.getText());
+        for (int i = 0; i < obs.size(); i++) {
+            if (obs.get(i).getId() == this.film.getId()) {
+                this.obs.set(i, this.film);
+            }
+        }
         // todo "update on api"
         this.close();
     }

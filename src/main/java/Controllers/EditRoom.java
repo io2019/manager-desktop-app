@@ -33,11 +33,14 @@ public class EditRoom {
                 no = Integer.parseUnsignedInt(this.roomNo.getText());
 
 
-                this.obs.stream().filter(r -> r.getId() == no).findFirst().ifPresent( r -> {
-                    r.setSeatsNumber(seats);
-                    r.setSeats(new ArrayList<>(seats));
-                });
-                // todo "the same but on api"
+                for (int i = 0; i < this.obs.size(); i++) {
+                    if (this.obs.get(i).getId() == this.room.getId()) {
+                        this.room.setSeatsNumber(seats);
+                        this.room.setSeats(new ArrayList<>(seats));
+                        this.obs.set(i, this.room);
+                        // todo "the same but on api"
+                    }
+                }
 
                 close();
             } catch (NumberFormatException e) {

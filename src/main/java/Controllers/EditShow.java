@@ -38,11 +38,17 @@ public class EditShow {
     @FXML
     void confirm(ActionEvent event) {
         Date date = Date.from(this.datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        this.obs.stream().filter(s -> s.getId() == showtime.getId()).findFirst().ifPresent(s -> {
-            s.setDate(date);
-            s.setFilm(this.filmComboBox.getValue());
-            s.setShowroom(this.roomComboBox.getValue());
-        });
+
+        for (int i = 0; i < this.obs.size(); i++) {
+            if (this.obs.get(i).getId() == this.showtime.getId()) {
+                this.showtime.setDate(date);
+                this.showtime.setFilm(this.filmComboBox.getValue());
+                this.showtime.setShowroom(this.roomComboBox.getValue());
+
+                this.obs.set(i, this.showtime);
+                // todo "api call"
+            }
+        }
 
         close();
     }
