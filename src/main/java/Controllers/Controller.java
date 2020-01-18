@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    private APIController controller = new APIController();
+    private APIController controller;
     private Parent root;
     private FXMLLoader loader;
     private Stage stage;
@@ -95,7 +95,7 @@ public class Controller implements Initializable {
     @FXML
     void refreshFilms() {
         // todo "api call"
-        Call<List<Film>> callSync = this.controller.api.getFilms();
+        Call<List<Film>> callSync = APIController.api.getFilms();
         try {
             List<Film> films = callSync.execute().body();
             this.filmsPane.setItems(null);
@@ -108,7 +108,7 @@ public class Controller implements Initializable {
     @FXML
     void refreshRooms() {
         // todo "api call"
-        Call<List<Showroom>> callSync = this.controller.api.getRooms();
+        Call<List<Showroom>> callSync = APIController.api.getRooms();
         try {
             List<Showroom> rooms = callSync.execute().body();
             this.roomPane.setItems(null);
@@ -121,7 +121,7 @@ public class Controller implements Initializable {
     @FXML
     void refreshShows() {
         // todo "api call"
-        Call<List<Showtime>> callSync = this.controller.api.getShows();
+        Call<List<Showtime>> callSync = APIController.api.getShows();
         try {
             List<Showtime> shows = callSync.execute().body();
             this.showPane.setItems(null);
@@ -271,7 +271,7 @@ public class Controller implements Initializable {
     void getLogs(ActionEvent event) {
         Date start = Date.from(this.startDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date end = Date.from(this.endDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Call<List<Log>> callSync = this.controller.api.getLogs(start, end);
+        Call<List<Log>> callSync = APIController.api.getLogs(start, end);
         try {
             Response<List<Log>> response = callSync.execute();
             List<Log> logs = response.body();

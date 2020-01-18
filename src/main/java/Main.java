@@ -15,9 +15,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = (Parent) FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
-//        primaryStage.setTitle("Hello World");
+        Parent root = (Parent) FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
         Scene scene = new Scene(root);
+        primaryStage.setTitle("KINOPOL LOGIN");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -26,20 +26,5 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         launch(args);
-//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-//        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.github.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(httpClient.build())
-//                .build();
-//        UserService service = retrofit.create(UserService.class);
-//        Call<User> callSync = service.getUser("eugenp");
-//
-//        try {
-//            Response<User> response = callSync.execute();
-//            User user = response.body();
-//            System.out.println(user.getLogin());
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
     }
 }
