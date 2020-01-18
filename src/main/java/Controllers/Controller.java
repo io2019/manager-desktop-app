@@ -10,10 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Film;
-import model.Log;
-import model.Showroom;
-import model.Showtime;
+import model.*;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -99,6 +96,18 @@ public class Controller implements Initializable {
     private DatePicker showtimeEndDate;
 
     @FXML
+    private DatePicker ordersStartDate;
+
+    @FXML
+    private DatePicker ordersEndDate;
+
+    @FXML
+    private Button ordersOkButton;
+
+    @FXML
+    private ListView<Order> ordersList;
+
+    @FXML
     void refreshFilms() {
         // todo "api call"
         Call<List<Film>> callSync = APIController.api.getFilms();
@@ -144,6 +153,22 @@ public class Controller implements Initializable {
                 List<Showtime> shows = callSync.execute().body();
                 this.showPane.setItems(null);
                 this.showPane.setItems(FXCollections.observableList(shows));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void getOrders() {
+        if (!( this.ordersEndDate.getEditor().getText().isEmpty() || this.ordersStartDate.getEditor().getText().isEmpty()) ) {
+            Date start = Date.from(this.ordersEndDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date end = Date.from(this.ordersStartDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Call<List<Order>> callSync = APIController.api.getOrders(start, end);
+            try {
+                List<Order> orders = callSync.execute().body();
+                this.ordersList.setItems(null);
+                this.ordersList.setItems(FXCollections.observableList(orders));
             } catch (IOException e) {
                 e.printStackTrace();
             }

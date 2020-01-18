@@ -47,20 +47,23 @@ public interface APIService {
     @PUT("/showtimes/{id}")
     Call<Response> putShow(@Path("id") long id, @Body Showtime showtime);
 
-    @GET("/logs?from={startDate}&to={endDate}")
-    Call<List<Log>> getLogs(@Path("startDate") Date startDate, @Path("endDate") Date endDate);
+    @GET("/logs")
+    Call<List<Log>> getLogs(@Query("startDate") Date startDate, @Query("endDate") Date endDate);
 
     @PATCH("/orders/{id}")
     Call<Response> patchOrder(@Path("id") long id, @Body Order order);
 
-    @GET("/orders?from={startDate}&to={endDate}")
-    Call<List<Order>> getOrders(@Path("startDate") Date startDate, @Path("endDate") Date endDate);
+    @GET("/orders")
+    Call<List<Order>> getOrders(@Query("startDate") Date startDate, @Query("endDate") Date endDate);
 
 //    @POST("/showtimes")
 //    Call<Response>
 
-    @GET("/showtimes?from={startDate}&to={endDate}")
-    Call<List<Showtime>> findShowtimesBetween(@Path("startDate") Date startDate, @Path("endDate") Date endDate);
+    @GET("/showtimes")
+    Call<List<Showtime>> findShowtimesBetween(@Query("startDate") Date startDate, @Query("endDate") Date endDate);
+
+    @GET("/v2/api-docs")
+    Call<List<String>> getApiDocs();
 
 
 }

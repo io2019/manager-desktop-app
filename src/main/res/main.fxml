@@ -98,6 +98,28 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
+                  <Tab text="Rezerwacje">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="446.0" prefWidth="640.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="634.0">
+                                       <children>
+                                          <ListView fx:id="ordersList" layoutY="76.0" prefHeight="363.0" prefWidth="630.0" />
+                                          <DatePicker fx:id="ordersStartDate" layoutX="29.0" layoutY="14.0" />
+                                          <DatePicker fx:id="ordersEndDate" layoutX="243.0" layoutY="14.0" />
+                                          <Button fx:id="ordersOkButton" layoutX="504.0" layoutY="14.0" mnemonicParsing="false" onAction="#getOrders" text="OK" />
+                                          <Text layoutX="114.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
+                                          <Text layoutX="326.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </children></AnchorPane>
