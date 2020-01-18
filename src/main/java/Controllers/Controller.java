@@ -93,6 +93,12 @@ public class Controller implements Initializable {
     private Button showRefreshButton;
 
     @FXML
+    private DatePicker showtimeStartDate;
+
+    @FXML
+    private DatePicker showtimeEndDate;
+
+    @FXML
     void refreshFilms() {
         // todo "api call"
         Call<List<Film>> callSync = APIController.api.getFilms();
@@ -121,13 +127,26 @@ public class Controller implements Initializable {
     @FXML
     void refreshShows() {
         // todo "api call"
-        Call<List<Showtime>> callSync = APIController.api.getShows();
-        try {
-            List<Showtime> shows = callSync.execute().body();
-            this.showPane.setItems(null);
-            this.showPane.setItems(FXCollections.observableList(shows));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (this.showtimeStartDate.getEditor().getText().isEmpty() || this.showtimeEndDate.getEditor().getText().isEmpty()) {
+            Call<List<Showtime>> callSync = APIController.api.getShows();
+            try {
+                List<Showtime> shows = callSync.execute().body();
+                this.showPane.setItems(null);
+                this.showPane.setItems(FXCollections.observableList(shows));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Date start = Date.from(this.showtimeStartDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date end = Date.from(this.showtimeEndDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Call<List<Showtime>> callSync = APIController.api.findShowtimesBetween(start, end);
+            try {
+                List<Showtime> shows = callSync.execute().body();
+                this.showPane.setItems(null);
+                this.showPane.setItems(FXCollections.observableList(shows));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

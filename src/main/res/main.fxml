@@ -69,6 +69,10 @@
                               <Button fx:id="editShowButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editShow" prefHeight="25.0" prefWidth="151.0" text="Edytuj seans" />
                               <Button fx:id="deleteShowButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteShow" prefHeight="25.0" prefWidth="151.0" text="Usuń seans" />
                               <Button fx:id="showRoomButton" layoutX="491.0" layoutY="390.0" mnemonicParsing="false" onAction="#refreshShows" text="Refresh" />
+                              <DatePicker fx:id="showtimeStartDate" layoutX="403.0" layoutY="224.0" />
+                              <DatePicker fx:id="showtimeEndDate" layoutX="403.0" layoutY="279.0" />
+                              <Text layoutX="410.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" wrappingWidth="114.7294921875" />
+                              <Text layoutX="410.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" wrappingWidth="125.7294921875" />
                            </children>
                         </AnchorPane>
                      </content>

@@ -59,5 +59,8 @@ public interface APIService {
 //    @POST("/showtimes")
 //    Call<Response>
 
+    @GET("/showtimes?from={startDate}&to={endDate}")
+    Call<List<Showtime>> findShowtimesBetween(@Path("startDate") Date startDate, @Path("endDate") Date endDate);
+
 
 }
