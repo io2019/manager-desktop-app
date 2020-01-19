@@ -7,13 +7,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="235.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Login">
    <children>
       <Text layoutX="53.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="110.7294921875" />
       <Text layoutX="53.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="110.7294921875" />
       <TextField fx:id="usernameField" layoutX="34.0" layoutY="69.0" prefHeight="25.0" prefWidth="370.0" />
-      <TextField fx:id="passwordField" layoutX="34.0" layoutY="130.0" prefHeight="25.0" prefWidth="370.0" />
+      <PasswordField fx:id="passwordField" layoutX="34.0" layoutY="130.0" prefHeight="25.0" prefWidth="370.0" />
       <Button fx:id="okButton" layoutX="188.0" layoutY="176.0" mnemonicParsing="false" onAction="#login" text="OK" />
+      <Text fx:id="errorText" fill="RED" layoutX="120.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong credentials" textAlignment="CENTER" visible="false" wrappingWidth="173.7294921875" />
    </children>
 </AnchorPane>

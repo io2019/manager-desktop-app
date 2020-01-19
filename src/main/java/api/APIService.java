@@ -3,6 +3,7 @@ package api;
 import api.responses.Response;
 import model.Film;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.*;
 import model.*;
 
@@ -63,7 +64,7 @@ public interface APIService {
     Call<List<Showtime>> findShowtimesBetween(@Query("startDate") Date startDate, @Query("endDate") Date endDate);
 
     @GET("/v2/api-docs")
-    Call<List<String>> getApiDocs();
+    Call<Object> getApiDocs();
 
 
 }
