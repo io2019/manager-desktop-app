@@ -8,21 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Film;
-import model.MovieCategories;
+import model.Utils;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class AddFilm {
 
@@ -82,7 +74,7 @@ public class AddFilm {
 
     void setList(ObservableList<Film> films) {
         this.obs = films;
-        this.categoryComboBox.setItems(FXCollections.observableList(MovieCategories.categories));
+        this.categoryComboBox.setItems(FXCollections.observableList(Utils.categories));
     }
 
     void close() {

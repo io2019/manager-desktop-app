@@ -8,17 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Film;
-import model.MovieCategories;
+import model.Utils;
 import retrofit2.Call;
-import retrofit2.Response;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Duration;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class EditFilm implements Initializable {
@@ -104,7 +100,7 @@ public class EditFilm implements Initializable {
 
         this.directorTextBox.setText(film.getDirector());
 
-        this.categoryComboBox.setItems(FXCollections.observableList(MovieCategories.categories));
+        this.categoryComboBox.setItems(FXCollections.observableList(Utils.categories));
         for (int i = 0; i < this.categoryComboBox.getItems().size(); i++) {
             if (this.categoryComboBox.getItems().get(i).equals(film.getCategory())) {
                 this.categoryComboBox.getSelectionModel().select(i);
