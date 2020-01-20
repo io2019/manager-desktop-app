@@ -1,4 +1,4 @@
-package Controllers;
+package controllers;
 
 import api.APIService;
 import api.BasicAuthInterceptor;

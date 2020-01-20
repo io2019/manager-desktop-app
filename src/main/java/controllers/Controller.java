@@ -1,7 +1,6 @@
-package Controllers;
+package controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -30,82 +29,98 @@ public class Controller implements Initializable {
     private Stage stage;
 
     @FXML
-    private Button editFilmButton;
+    private Button editShowButton;
 
     @FXML
-    private Button editShowButton;
+    private TextField logsStartHours;
 
     @FXML
     private Button addFilmButton;
 
     @FXML
-    private Button editRoomButton;
-
-    @FXML
-    private Button deleteShowButton;
-
-    @FXML
-    private ListView<Showroom> roomPane;
-
-    @FXML
-    private Button addRoomButton;
-
-    @FXML
-    private ListView<Showtime> showPane;
-
-    @FXML
-    private Button deleteRoomButton;
-
-    @FXML
-    private TabPane panes;
-
-    @FXML
-    private ListView<Film> filmsPane;
-
-    @FXML
-    private ListView<Log> logsList;
-
-    @FXML
-    private Button deleteFilmButton;
-
-    @FXML
-    private Button addShowButton;
-
-    @FXML
-    private Button filmRefreshButton;
-
-    @FXML
-    private DatePicker startDate;
+    private DatePicker ordersEndDate;
 
     @FXML
     private DatePicker endDate;
 
     @FXML
+    private Button editRoomButton;
+
+    @FXML
+    private TextField showStartMinutes;
+
+    @FXML
     private Button logOkButton;
 
     @FXML
-    private Button roomRefreshButton;
-
-    @FXML
-    private Button showRefreshButton;
-
-    @FXML
-    private DatePicker showtimeStartDate;
-
-    @FXML
-    private DatePicker showtimeEndDate;
+    private ListView<Showroom> roomPane;
 
     @FXML
     private DatePicker ordersStartDate;
 
     @FXML
-    private DatePicker ordersEndDate;
+    private ListView<Film> filmsPane;
+
+    @FXML
+    private ListView<Showtime> showPane;
+
+    @FXML
+    private TextField logsEndHours;
+
+    @FXML
+    private DatePicker showtimeEndDate;
+
+    @FXML
+    private TabPane panes;
+
+    @FXML
+    private Button filmRefreshButton;
+
+    @FXML
+    private TextField showStartHours;
+
+    @FXML
+    private TextField showEndHours;
+
+    @FXML
+    private Button roomRefreshButton;
+
+    @FXML
+    private Button showRoomButton;
+
+    @FXML
+    private Button editFilmButton;
 
     @FXML
     private Button ordersOkButton;
 
     @FXML
+    private TextField logsEndMinutes;
+
+    @FXML
+    private ListView<Log> logsList;
+
+    @FXML
+    private DatePicker showtimeStartDate;
+
+    @FXML
+    private TextField logsStartMinutes;
+
+    @FXML
+    private Button addRoomButton;
+
+    @FXML
+    private TextField showEndMinutes;
+
+    @FXML
+    private Button addShowButton;
+
+    @FXML
+    private DatePicker startDate;
+
+    @FXML
     private ListView<Order> ordersList;
+
 
     @FXML
     void refreshFilms() {
@@ -146,8 +161,17 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
         } else {
-            Date start = Date.from(this.showtimeStartDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Date end = Date.from(this.showtimeEndDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            System.out.println(this.showEndHours.getText());
+            LocalDateTime start = LocalDateTime.from(this.showtimeStartDate.getValue().atStartOfDay());
+
+            start = start.plusHours(Long.parseLong(this.showStartHours.getText()));
+            start = start.plusMinutes(Long.parseLong(this.showStartMinutes.getText()));
+
+            LocalDateTime end = LocalDateTime.from(this.showtimeEndDate.getValue().atStartOfDay());
+
+            end = end.plusHours(Long.parseLong(this.showEndHours.getText()));
+            end = end.plusMinutes(Long.parseLong(this.showEndMinutes.getText()));
+
             Call<List<Showtime>> callSync = APIController.api.findShowtimesBetween(start, end);
             try {
                 List<Showtime> shows = callSync.execute().body();
@@ -216,12 +240,6 @@ public class Controller implements Initializable {
         }
     }
 
-    @FXML
-    void deleteFilm(ActionEvent event) {
-        this.filmsPane.getItems().remove(this.filmsPane.getSelectionModel().getSelectedIndex());
-        // todo "delete on API"
-
-    }
 
     @FXML
     void addRoom(ActionEvent event) {
@@ -261,11 +279,6 @@ public class Controller implements Initializable {
         }
     }
 
-    @FXML
-    void deleteRoom(ActionEvent event) {
-        this.roomPane.getItems().remove(this.roomPane.getSelectionModel().getSelectedIndex());
-        // todo "api call"
-    }
 
     @FXML
     void addShow(ActionEvent event) {
@@ -306,15 +319,20 @@ public class Controller implements Initializable {
         }
     }
 
-    @FXML
-    void deleteShow(ActionEvent event) {
-        this.showPane.getItems().remove(this.showPane.getSelectionModel().getSelectedIndex());
-    }
 
     @FXML
     void getLogs(ActionEvent event) {
-        Date start = Date.from(this.startDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date end = Date.from(this.endDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDateTime start = LocalDateTime.from(this.startDate.getValue().atStartOfDay());
+
+        start = start.plusHours(Long.parseLong(this.logsStartHours.getText()));
+        start = start.plusMinutes(Long.parseLong(this.logsStartMinutes.getText()));
+
+        LocalDateTime end = LocalDateTime.from(this.endDate.getValue().atStartOfDay());
+
+        end = end.plusHours(Long.parseLong(this.logsEndHours.getText()));
+        end = end.plusMinutes(Long.parseLong(this.logsEndMinutes.getText()));
+
+
         Call<List<Log>> callSync = APIController.api.getLogs(start, end);
         try {
             Response<List<Log>> response = callSync.execute();
@@ -327,6 +345,9 @@ public class Controller implements Initializable {
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.refreshRooms();
+        this.refreshFilms();
+        this.refreshShows();
     }
 
 

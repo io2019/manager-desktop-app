@@ -1,34 +1,36 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Showtime {
-    private long id;
-    private Film film;
+    private Long id;
+    private Film movie;
     private Showroom showroom;
-    private Date date;
+    private String date;
+    private String finishHour;
 
-    public Showtime(long id, Film film, Showroom showroom, Date date) {
+    public Showtime(Long id, Film movie, Showroom showroom, String date, String finishHour) {
         this.id = id;
-        this.film = film;
+        this.movie = movie;
         this.showroom = showroom;
         this.date = date;
+        this.finishHour = finishHour;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public Film getFilm() {
-        return film;
+        return movie;
     }
 
     public void setFilm(Film film) {
-        this.film = film;
+        this.movie = film;
     }
 
     public Showroom getShowroom() {
@@ -39,16 +41,16 @@ public class Showtime {
         this.showroom = showroom;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     @Override
     public String toString() {
-        return this.film.toString() + ";" + this.showroom.getId() + ";" + this.date.toString();
+        return this.movie.toString() + ";" + this.showroom.getName() + ";" + this.date.toString();
     }
 }

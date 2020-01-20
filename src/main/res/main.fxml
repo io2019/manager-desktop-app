@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
+<GridPane alignment="center" hgap="10" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <children>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0">
          <children>
@@ -26,7 +26,6 @@
                               </ScrollPane>
                               <Button fx:id="addFilmButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addFilm" prefHeight="25.0" prefWidth="151.0" text="Dodaj film" />
                               <Button fx:id="editFilmButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editFilm" prefHeight="25.0" prefWidth="151.0" text="Edytuj film" />
-                              <Button fx:id="deleteFilmButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteFilm" prefHeight="25.0" prefWidth="151.0" text="Usuń film" />
                               <Button fx:id="filmRefreshButton" layoutX="471.0" layoutY="370.0" mnemonicParsing="false" onAction="#refreshFilms" text="Refresh" />
                            </children></AnchorPane>
                   </content>
@@ -46,7 +45,6 @@
                               </ScrollPane>
                               <Button fx:id="addRoomButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="25.0" prefWidth="151.0" text="Dodaj salę" />
                               <Button fx:id="editRoomButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editRoom" prefHeight="25.0" prefWidth="151.0" text="Edytuj salę" />
-                              <Button fx:id="deleteRoomButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="25.0" prefWidth="151.0" text="Usuń salę" />
                               <Button fx:id="roomRefreshButton" layoutX="481.0" layoutY="380.0" mnemonicParsing="false" onAction="#refreshRooms" text="Refresh" />
                            </children>
                         </AnchorPane>
@@ -67,12 +65,15 @@
                               </ScrollPane>
                               <Button fx:id="addShowButton" layoutX="426.0" layoutY="32.0" mnemonicParsing="false" onAction="#addShow" prefHeight="25.0" prefWidth="151.0" text="Dodaj seans" />
                               <Button fx:id="editShowButton" layoutX="426.0" layoutY="84.0" mnemonicParsing="false" onAction="#editShow" prefHeight="25.0" prefWidth="151.0" text="Edytuj seans" />
-                              <Button fx:id="deleteShowButton" layoutX="426.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteShow" prefHeight="25.0" prefWidth="151.0" text="Usuń seans" />
                               <Button fx:id="showRoomButton" layoutX="491.0" layoutY="390.0" mnemonicParsing="false" onAction="#refreshShows" text="Refresh" />
-                              <DatePicker fx:id="showtimeStartDate" layoutX="403.0" layoutY="224.0" />
-                              <DatePicker fx:id="showtimeEndDate" layoutX="403.0" layoutY="279.0" />
+                              <DatePicker fx:id="showtimeStartDate" layoutX="403.0" layoutY="224.0" prefHeight="25.0" prefWidth="111.0" />
+                              <DatePicker fx:id="showtimeEndDate" layoutX="403.0" layoutY="279.0" prefHeight="25.0" prefWidth="115.0" />
                               <Text layoutX="410.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" wrappingWidth="114.7294921875" />
                               <Text layoutX="410.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" wrappingWidth="125.7294921875" />
+                              <TextField fx:id="showStartHours" layoutX="526.0" layoutY="224.0" prefHeight="25.0" prefWidth="37.0" />
+                              <TextField fx:id="showStartMinutes" layoutX="577.0" layoutY="224.0" prefHeight="25.0" prefWidth="42.0" />
+                              <TextField fx:id="showEndMinutes" layoutX="566.0" layoutY="279.0" prefHeight="25.0" prefWidth="45.0" />
+                              <TextField fx:id="showEndHours" layoutX="523.0" layoutY="279.0" prefHeight="25.0" prefWidth="35.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -86,11 +87,15 @@
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="634.0">
                                        <children>
                                           <ListView fx:id="logsList" layoutY="76.0" prefHeight="363.0" prefWidth="630.0" />
-                                          <DatePicker fx:id="startDate" layoutX="29.0" layoutY="14.0" />
-                                          <DatePicker fx:id="endDate" layoutX="243.0" layoutY="14.0" />
+                                          <DatePicker fx:id="startDate" layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="97.0" />
+                                          <DatePicker fx:id="endDate" layoutX="243.0" layoutY="14.0" prefHeight="25.0" prefWidth="92.0" />
                                           <Button fx:id="logOkButton" layoutX="504.0" layoutY="14.0" mnemonicParsing="false" onAction="#getLogs" text="OK" />
                                           <Text layoutX="114.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
                                           <Text layoutX="326.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
+                                          <TextField fx:id="logsStartHours" layoutX="130.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
+                                          <TextField fx:id="logsStartMinutes" layoutX="178.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
+                                          <TextField fx:id="logsEndHours" layoutX="351.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
+                                          <TextField fx:id="logsEndMinutes" layoutX="401.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -107,11 +112,15 @@
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="634.0">
                                        <children>
                                           <ListView fx:id="ordersList" layoutY="76.0" prefHeight="363.0" prefWidth="630.0" />
-                                          <DatePicker fx:id="ordersStartDate" layoutX="29.0" layoutY="14.0" />
-                                          <DatePicker fx:id="ordersEndDate" layoutX="243.0" layoutY="14.0" />
-                                          <Button fx:id="ordersOkButton" layoutX="504.0" layoutY="14.0" mnemonicParsing="false" onAction="#getOrders" text="OK" />
+                                          <DatePicker fx:id="ordersStartDate" layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="101.0" />
+                                          <DatePicker fx:id="ordersEndDate" layoutX="265.0" layoutY="14.0" prefHeight="25.0" prefWidth="86.0" />
+                                          <Button fx:id="ordersOkButton" layoutX="576.0" layoutY="14.0" mnemonicParsing="false" onAction="#getOrders" text="OK" />
                                           <Text layoutX="114.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
                                           <Text layoutX="326.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
+                                          <TextField fx:id="ordersStartHours" layoutX="136.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
+                                          <TextField fx:id="ordersStartMinutes" layoutX="196.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
+                                          <TextField fx:id="ordersEndHours" layoutX="369.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
+                                          <TextField fx:id="ordersEndMinutes" layoutX="446.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
                                        </children>
                                     </AnchorPane>
                                  </content>

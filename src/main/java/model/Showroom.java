@@ -1,44 +1,52 @@
 package model;
 
-import java.util.List;
-
 public class Showroom {
-    private int id;
-    private int seatsNumber;
-    private List<Seat> seats;
+    private Long id;
+    private String name;
+    private int noOfColumns;
+    private int noOfRows;
 
-    public Showroom(int id, int seatsNumber, List<Seat> seats) {
+    public Showroom(Long id, String name, int cols, int rows) {
         this.id = id;
-        this.seatsNumber = seatsNumber;
-        this.seats = seats;
+        this.name = name;
+        this.noOfColumns = cols;
+        this.noOfRows = rows;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getSeatsNumber() {
-        return seatsNumber;
+    public String getName() {
+        return name;
     }
 
-    public void setSeatsNumber(int seatsNumber) {
-        this.seatsNumber = seatsNumber;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
+    public int getNoOfColumns() {
+        return noOfColumns;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
+    public void setNoOfColumns(int noOfColumns) {
+        this.noOfColumns = noOfColumns;
+    }
+
+    public int getNoOfRows() {
+        return noOfRows;
+    }
+
+    public void setNoOfRows(int noOfRows) {
+        this.noOfRows = noOfRows;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(this.id);
+        return String.valueOf(this.name);
     }
 }

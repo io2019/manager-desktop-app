@@ -1,6 +1,5 @@
-package Controllers;
+package controllers;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,13 +7,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Film;
 import model.Showroom;
 import model.Showtime;
+import model.ShowtimeRequest;
+import retrofit2.Call;
+import retrofit2.Response;
 
-import java.time.ZoneId;
+import java.io.IOException;
+import java.time.*;
 import java.util.Date;
 
 public class AddShow {
@@ -26,9 +28,6 @@ public class AddShow {
     private ComboBox<Showroom> roomComboBox;
 
     @FXML
-    private TextField idTextBox;
-
-    @FXML
     private DatePicker datePicker;
 
     @FXML
@@ -38,21 +37,35 @@ public class AddShow {
     private ComboBox<Film> filmComboBox;
 
     @FXML
+    private TextField timeTextBox;
+
+    @FXML
     void confirm(ActionEvent event) {
         if (!this.datePicker.getEditor().getText().isEmpty()) {
-            int id;
+            LocalDateTime date = this.datePicker.getValue().atStartOfDay();
+            long hours, minutes;
             try {
-                id = Integer.parseUnsignedInt(this.idTextBox.getText());
-                Date date = Date.from(this.datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                if (this.obs.stream().noneMatch(s -> s.getId() == id)) {
-                    this.obs.add(new Showtime(id, this.filmComboBox.getValue(), this.roomComboBox.getValue(), date));
-                    // todo "api call"
-                }
+                String[] split = this.timeTextBox.getText().split(":");
+                date = date.plusHours(Long.parseLong(split[0]));
+                date = date.plusMinutes(Long.parseLong(split[1]));
 
-                close();
+
+                ShowtimeRequest show = new ShowtimeRequest();
+                show.setMovieId(this.filmComboBox.getValue().getId());
+                show.setShowroomId(this.roomComboBox.getValue().getId());
+                show.setDateTime(date);
+
+                Call<Object> call = APIController.api.postShow(show);
+                try {
+                    Response<Object> response = call.execute();
+                    System.out.println(response.code());
+                } catch (IOException e ) {
+                    e.printStackTrace();
+                }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                e.printStackTrace();;
             }
+            close();
         }
     }
 

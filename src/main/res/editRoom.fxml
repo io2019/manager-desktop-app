@@ -7,12 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EditRoom">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditRoom">
    <children>
       <Button fx:id="okButton" layoutX="507.0" layoutY="350.0" mnemonicParsing="false" onAction="#confirm" text="OK" />
-      <TextField fx:id="numberOfSeatsText" layoutX="29.0" layoutY="47.0" />
-      <Text layoutX="29.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of seats" />
-      <TextField fx:id="roomNo" disable="true" layoutX="29.0" layoutY="110.0" />
-      <Text layoutX="29.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room number" />
+      <TextField fx:id="noOfColumnsText" layoutX="22.0" layoutY="116.0" />
+      <Text layoutX="22.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba kolumn" />
+      <TextField fx:id="roomName" layoutX="22.0" layoutY="45.0" />
+      <Text layoutX="22.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa sali" />
+      <TextField fx:id="noOfRowsText" layoutX="22.0" layoutY="175.0" />
+      <Text layoutX="25.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba rzędów" />
    </children>
 </AnchorPane>

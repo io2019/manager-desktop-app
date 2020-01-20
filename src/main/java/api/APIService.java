@@ -7,6 +7,7 @@ import retrofit2.Callback;
 import retrofit2.http.*;
 import model.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,13 +23,13 @@ public interface APIService {
     Call<List<Showroom>> getRooms();
 
     @POST("/movies")
-    Call<Response> postFilm(@Body Film film);
+    Call<Object> postFilm(@Body Film film);
 
     @POST("/showtimes")
-    Call<Response> postShow(@Body Showtime showtime);
+    Call<Object> postShow(@Body ShowtimeRequest showtime);
 
     @POST("/showrooms")
-    Call<Response> postRoom(@Body Showroom showroom);
+    Call<Object> postRoom(@Body Showroom showroom);
 
     @GET("/movies/{id}")
     Call<Film> getFilm(@Path("id") long id);
@@ -40,16 +41,16 @@ public interface APIService {
     Call<Showroom> getRoom(@Path("id") long id);
 
     @PUT("/movies/{id}")
-    Call<Response> putFilm(@Path("id") long id, @Body Film film);
+    Call<Void> putFilm(@Path("id") long id, @Body Film film);
 
     @PUT("/showrooms/{id}")
-    Call<Response> putRoom(@Path("id") long id, @Body Showroom showroom);
+    Call<Void> putRoom(@Path("id") long id, @Body Showroom showroom);
 
     @PUT("/showtimes/{id}")
-    Call<Response> putShow(@Path("id") long id, @Body Showtime showtime);
+    Call<Void> putShow(@Path("id") long id, @Body Showtime showtime);
 
     @GET("/logs")
-    Call<List<Log>> getLogs(@Query("startDate") Date startDate, @Query("endDate") Date endDate);
+    Call<List<Log>> getLogs(@Query("startDate") LocalDateTime startDate, @Query("endDate") LocalDateTime endDate);
 
     @PATCH("/orders/{id}")
     Call<Response> patchOrder(@Path("id") long id, @Body Order order);
@@ -61,7 +62,7 @@ public interface APIService {
 //    Call<Response>
 
     @GET("/showtimes")
-    Call<List<Showtime>> findShowtimesBetween(@Query("startDate") Date startDate, @Query("endDate") Date endDate);
+    Call<List<Showtime>> findShowtimesBetween(@Query("startDate") LocalDateTime startDate, @Query("endDate") LocalDateTime endDate);
 
     @GET("/v2/api-docs")
     Call<Object> getApiDocs();
