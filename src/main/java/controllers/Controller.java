@@ -32,9 +32,6 @@ public class Controller implements Initializable {
     private Button editShowButton;
 
     @FXML
-    private TextField logsStartHours;
-
-    @FXML
     private Button addFilmButton;
 
     @FXML
@@ -65,9 +62,6 @@ public class Controller implements Initializable {
     private ListView<Showtime> showPane;
 
     @FXML
-    private TextField logsEndHours;
-
-    @FXML
     private DatePicker showtimeEndDate;
 
     @FXML
@@ -95,16 +89,10 @@ public class Controller implements Initializable {
     private Button ordersOkButton;
 
     @FXML
-    private TextField logsEndMinutes;
-
-    @FXML
     private ListView<Log> logsList;
 
     @FXML
     private DatePicker showtimeStartDate;
-
-    @FXML
-    private TextField logsStartMinutes;
 
     @FXML
     private Button addRoomButton;
@@ -120,6 +108,13 @@ public class Controller implements Initializable {
 
     @FXML
     private ListView<Order> ordersList;
+
+    @FXML
+    private TextField logsStartTime;
+
+    @FXML
+    private TextField logsEndTime;
+
 
 
     @FXML
@@ -185,15 +180,18 @@ public class Controller implements Initializable {
 
     @FXML
     void getOrders() {
-        if (!( this.ordersEndDate.getEditor().getText().isEmpty() || this.ordersStartDate.getEditor().getText().isEmpty()) ) {
-            Date start = Date.from(this.ordersEndDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Date end = Date.from(this.ordersStartDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Call<List<Order>> callSync = APIController.api.getOrders(start, end);
+        if (!(this.ordersEndDate.getEditor().getText().isEmpty() || this.ordersStartDate.getEditor().getText().isEmpty())) {
             try {
-                List<Order> orders = callSync.execute().body();
-                this.ordersList.setItems(null);
-                this.ordersList.setItems(FXCollections.observableList(orders));
-            } catch (IOException e) {
+                Call<List<Order>> call = APIController.api.getOrders(this.ordersStartDate.getValue(), this.ordersEndDate.getValue());
+                try {
+                    Response<List<Order>> response = call.execute();
+                    System.out.println(response.code());
+                    this.ordersList.setItems(null);
+                    this.ordersList.setItems(FXCollections.observableList(response.body()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
@@ -322,25 +320,38 @@ public class Controller implements Initializable {
 
     @FXML
     void getLogs(ActionEvent event) {
-        LocalDateTime start = LocalDateTime.from(this.startDate.getValue().atStartOfDay());
+        if (this.logsEndTime.getText().isEmpty() || this.logsStartTime.getText().isEmpty() ||
+                this.startDate.getEditor().getText().isEmpty() || this.endDate.getEditor().getText().isEmpty()) {
+            Call<List<Log>> call = APIController.api.getLogs();
+            try {
+                Response<List<Log>> response = call.execute();
+                System.out.println(response.code());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            String[] splitStart = this.logsStartTime.getText().split(":");
+            String[] splitEnd = this.logsStartTime.getText().split(":");
+            try {
+                LocalDateTime start = this.startDate.getValue().atStartOfDay();
+                start = start.plusHours(Long.parseLong(splitStart[0]));
+                start = start.plusMinutes(Long.parseLong(splitStart[1]));
 
-        start = start.plusHours(Long.parseLong(this.logsStartHours.getText()));
-        start = start.plusMinutes(Long.parseLong(this.logsStartMinutes.getText()));
+                LocalDateTime end = this.endDate.getValue().atStartOfDay();
+                end = end.plusHours(Long.parseLong(splitEnd[0]));
+                end = end.plusMinutes(Long.parseLong(splitEnd[1]));
 
-        LocalDateTime end = LocalDateTime.from(this.endDate.getValue().atStartOfDay());
-
-        end = end.plusHours(Long.parseLong(this.logsEndHours.getText()));
-        end = end.plusMinutes(Long.parseLong(this.logsEndMinutes.getText()));
-
-
-        Call<List<Log>> callSync = APIController.api.getLogs(start, end);
-        try {
-            Response<List<Log>> response = callSync.execute();
-            List<Log> logs = response.body();
-            this.logsList.setItems(null);
-            this.logsList.setItems(FXCollections.observableList(logs));
-        } catch (IOException e) {
-            e.printStackTrace();
+                Call<List<Log>> call = APIController.api.getLogs(start, end);
+                try {
+                    Response<List<Log>> response = call.execute();
+                    System.out.println(response.code());
+                    this.logsList.setItems(FXCollections.observableList(response.body()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
     }
 

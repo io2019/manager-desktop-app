@@ -90,12 +90,12 @@
                                           <DatePicker fx:id="startDate" layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="97.0" />
                                           <DatePicker fx:id="endDate" layoutX="243.0" layoutY="14.0" prefHeight="25.0" prefWidth="92.0" />
                                           <Button fx:id="logOkButton" layoutX="504.0" layoutY="14.0" mnemonicParsing="false" onAction="#getLogs" text="OK" />
-                                          <Text layoutX="114.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
-                                          <Text layoutX="326.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
-                                          <TextField fx:id="logsStartHours" layoutX="130.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
-                                          <TextField fx:id="logsStartMinutes" layoutX="178.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
-                                          <TextField fx:id="logsEndHours" layoutX="351.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
-                                          <TextField fx:id="logsEndMinutes" layoutX="401.0" layoutY="14.0" prefHeight="25.0" prefWidth="36.0" />
+                                          <Text layoutX="46.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
+                                          <Text layoutX="264.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
+                                          <TextField fx:id="logsStartTime" layoutX="139.0" layoutY="14.0" prefHeight="25.0" prefWidth="70.0" />
+                                          <TextField fx:id="logsEndTime" layoutX="347.0" layoutY="14.0" prefHeight="25.0" prefWidth="81.0" />
+                                          <Text layoutX="144.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(HH:mm)" />
+                                          <Text layoutX="358.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(HH:mm)" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -112,15 +112,11 @@
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="634.0">
                                        <children>
                                           <ListView fx:id="ordersList" layoutY="76.0" prefHeight="363.0" prefWidth="630.0" />
-                                          <DatePicker fx:id="ordersStartDate" layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="101.0" />
-                                          <DatePicker fx:id="ordersEndDate" layoutX="265.0" layoutY="14.0" prefHeight="25.0" prefWidth="86.0" />
+                                          <DatePicker fx:id="ordersStartDate" layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="184.0" />
+                                          <DatePicker fx:id="ordersEndDate" layoutX="265.0" layoutY="14.0" prefHeight="25.0" prefWidth="190.0" />
                                           <Button fx:id="ordersOkButton" layoutX="576.0" layoutY="14.0" mnemonicParsing="false" onAction="#getOrders" text="OK" />
-                                          <Text layoutX="114.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
-                                          <Text layoutX="326.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
-                                          <TextField fx:id="ordersStartHours" layoutX="136.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
-                                          <TextField fx:id="ordersStartMinutes" layoutX="196.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
-                                          <TextField fx:id="ordersEndHours" layoutX="369.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
-                                          <TextField fx:id="ordersEndMinutes" layoutX="446.0" layoutY="14.0" prefHeight="25.0" prefWidth="47.0" />
+                                          <Text layoutX="64.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
+                                          <Text layoutX="296.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End" />
                                        </children>
                                     </AnchorPane>
                                  </content>

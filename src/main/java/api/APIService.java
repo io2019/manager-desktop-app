@@ -7,6 +7,7 @@ import retrofit2.Callback;
 import retrofit2.http.*;
 import model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -50,13 +51,16 @@ public interface APIService {
     Call<Void> putShow(@Path("id") long id, @Body Showtime showtime);
 
     @GET("/logs")
-    Call<List<Log>> getLogs(@Query("startDate") LocalDateTime startDate, @Query("endDate") LocalDateTime endDate);
+    Call<List<Log>> getLogs(@Query("after") LocalDateTime startDate, @Query("before") LocalDateTime endDate);
+
+    @GET("/logs")
+    Call<List<Log>> getLogs();
 
     @PATCH("/orders/{id}")
     Call<Response> patchOrder(@Path("id") long id, @Body Order order);
 
     @GET("/orders")
-    Call<List<Order>> getOrders(@Query("startDate") Date startDate, @Query("endDate") Date endDate);
+    Call<List<Order>> getOrders(@Query("fromDate") LocalDate startDate, @Query("toDate") LocalDate endDate);
 
 //    @POST("/showtimes")
 //    Call<Response>
