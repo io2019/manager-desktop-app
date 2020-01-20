@@ -55,21 +55,26 @@ public class AddFilm {
         if (! (this.categoryComboBox.getValue().isEmpty() || this.durationTextBox.getText().isEmpty() ||
                 this.ageRestrictionTextBox.getText().isEmpty() || this.titleTextBox.getText().isEmpty())) {
             int age = Integer.parseInt(this.ageRestrictionTextBox.getText());
-            Duration duration = Duration.between(
-                    LocalTime.MIN,
-                    LocalTime.parse( this.durationTextBox.getText() + ":00")
-            );
-            film = new Film(null, this.titleTextBox.getText(), this.categoryComboBox.getValue(), duration.toString(),
-                    this.descriptionTextBox.getText(), this.directorTextBox.getText(), age);
-            this.obs.add(film);
-            // todo "add on api"
-            Call<Object> call = APIController.api.postFilm(film);
+            String[] split = this.durationTextBox.getText().split(":");
+            Long time;
             try {
-                Response<Object> response = call.execute();
-                System.out.println(response.code());
-            } catch (IOException e) {
+                time = Long.parseLong(split[1]);
+                time += (Long.parseLong(split[0]) * 60);
+                film = new Film(null, this.titleTextBox.getText(), this.categoryComboBox.getValue(), time.toString(),
+                        this.descriptionTextBox.getText(), this.directorTextBox.getText(), age);
+
+                Call<Object> call = APIController.api.postFilm(film);
+                try {
+                    Response<Object> response = call.execute();
+                    this.obs.add(film);
+                    System.out.println(response.code());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
+
             this.close();
 
         }

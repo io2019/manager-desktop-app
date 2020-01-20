@@ -11,6 +11,13 @@ import javafx.stage.Stage;
 import model.Film;
 import model.Showroom;
 import model.Showtime;
+import model.ShowtimeRequest;
+import retrofit2.Call;
+import retrofit2.Response;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class EditShow {
 
@@ -33,19 +40,42 @@ public class EditShow {
     private ComboBox<Film> filmComboBox;
 
     @FXML
+    private TextField timeTextBox;
+
+    @FXML
     void confirm(ActionEvent event) {
-//        LocalDateTime date = Date.from(this.datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        for (int i = 0; i < this.obs.size(); i++) {
-            if (this.obs.get(i).getId() == this.showtime.getId()) {
-//                this.showtime.setDate(date);
-                this.showtime.setFilm(this.filmComboBox.getValue());
-                this.showtime.setShowroom(this.roomComboBox.getValue());
 
-                this.obs.set(i, this.showtime);
-                // todo "api call"
+        LocalDateTime time = this.datePicker.getValue().atStartOfDay();
+        String[] split = this.timeTextBox.getText().split(":");
+        Long hours, minutes;
+        try {
+            hours = Long.parseLong(split[0]);
+            minutes = Long.parseLong(split[1]);
+            time = time.plusHours(hours);
+            time = time.plusMinutes(minutes);
+
+            this.showtime.setShowroom(this.roomComboBox.getValue());
+            this.showtime.setFilm(this.filmComboBox.getValue());
+            this.showtime.setDate(time.toString());
+
+            Call<Void> call = APIController.api.putShow(this.showtime.getId(), this.showtime);
+            try {
+                Response<Void> response = call.execute();
+                System.out.println(response.code());
+
+                for (int i = 0; i < this.obs.size(); i++) {
+                    if (this.obs.get(i).getId().equals(this.showtime.getId())) {
+                        this.obs.set(i, this.showtime);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
+
 
         close();
     }
@@ -59,7 +89,13 @@ public class EditShow {
 
         this.roomComboBox.getSelectionModel().select(this.showtime.getShowroom());
         this.filmComboBox.getSelectionModel().select(this.showtime.getFilm());
-        this.datePicker.getEditor().setText(this.showtime.getDate().toString());
+
+        LocalDate t = (LocalDateTime.parse(this.showtime.getDate())).toLocalDate();
+        this.datePicker.setValue(t);
+
+
+        LocalDateTime time = LocalDateTime.parse(this.showtime.getDate());
+        this.timeTextBox.setText(time.getHour() + ":" + time.getMinute());
     }
 
     private void close() {

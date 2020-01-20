@@ -50,28 +50,35 @@ public class EditFilm implements Initializable {
 
     @FXML
     void confirm() {
-        this.film.setTitle(this.titleTextBox.getText());
-        this.film.setAgeRestriction(Integer.parseInt(this.ageRestrictionTextBox.getText()));
-        this.film.setCategory(this.categoryComboBox.getValue());
-        this.film.setDescription(this.descriptionTextBox.getText());
-        this.film.setDirector(this.directorTextBox.getText());
-        Duration duration = Duration.between(
-                LocalTime.MIN,
-                LocalTime.parse( this.durationTextBox.getText() + ":00")
-        );
-        this.film.setDuration(duration.toString());
-        for (int i = 0; i < obs.size(); i++) {
-            if (obs.get(i).getId().equals(this.film.getId())) {
-                this.obs.set(i, this.film);
-            }
-        }
-        // todo "update on api"
-        Call<Void> call = APIController.api.putFilm(this.film.getId(), film);
+
+
+        String[] split = this.durationTextBox.getText().split(":");
         try {
-            call.execute();
-        } catch (IOException e) {
+            Long time = Long.parseLong(split[1]);
+            time += (Long.parseLong(split[0]) * 60);
+
+            this.film.setTitle(this.titleTextBox.getText());
+            this.film.setAgeRestriction(Integer.parseInt(this.ageRestrictionTextBox.getText()));
+            this.film.setCategory(this.categoryComboBox.getValue());
+            this.film.setDescription(this.descriptionTextBox.getText());
+            this.film.setDirector(this.directorTextBox.getText());
+            this.film.setDuration(time.toString());
+
+            Call<Void> call = APIController.api.putFilm(this.film.getId(), film);
+            try {
+                call.execute();
+                for (int i = 0; i < obs.size(); i++) {
+                    if (obs.get(i).getId().equals(this.film.getId())) {
+                        this.obs.set(i, this.film);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+
         this.close();
     }
 
@@ -85,14 +92,16 @@ public class EditFilm implements Initializable {
         this.titleTextBox.setText(film.getTitle());
         this.ageRestrictionTextBox.setText(String.valueOf(film.getAgeRestriction()));
         this.descriptionTextBox.setText(film.getDescription());
-        Duration dur = Duration.parse(film.getDuration());
-        String time;
-        if (dur.toHours() < 10) {
-            time = "0" + dur.toHours() + ":" + dur.toMinutes();
-        } else {
-            time = dur.toHours() + ":" + dur.toMinutes();
+
+        String minutes, hours;
+        try {
+            minutes = String.valueOf(Long.parseLong(film.getDuration()) % 60);
+            hours = String.valueOf(Long.parseLong(film.getDuration()) / 60);
+            this.durationTextBox.setText(hours + ":" + minutes);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
-        this.durationTextBox.setText(time);
+
         this.directorTextBox.setText(film.getDirector());
 
         this.categoryComboBox.setItems(FXCollections.observableList(MovieCategories.categories));
